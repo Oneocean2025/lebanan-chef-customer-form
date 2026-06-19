@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lebanan Chef Customer Details</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at top, rgba(218, 165, 32, 0.18), transparent 35%),
+        linear-gradient(135deg, #020403, #071914 45%, #050505);
+      color: #f8e8c0;
+      padding: 25px;
+    }
+
+    .page {
+      min-height: calc(100vh - 50px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 660px;
+      background: rgba(4, 20, 16, 0.92);
+      border: 1px solid rgba(218, 165, 32, 0.55);
+      border-radius: 26px;
+      padding: 28px;
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.55),
+        inset 0 0 30px rgba(218, 165, 32, 0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px solid rgba(218, 165, 32, 0.22);
+      border-radius: 20px;
+      pointer-events: none;
+    }
+
+    .arabic-pattern {
+      position: absolute;
+      top: -90px;
+      right: -90px;
+      width: 230px;
+      height: 230px;
+      border: 2px solid rgba(218, 165, 32, 0.16);
+      border-radius: 50%;
+      background:
+        repeating-conic-gradient(
+          from 0deg,
+          rgba(218, 165, 32, 0.11) 0deg 8deg,
+          transparent 8deg 16deg
+        );
+      opacity: 0.65;
+    }
+
+    .header {
+      position: relative;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .logo {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #d9a441;
+      box-shadow: 0 0 25px rgba(217, 164, 65, 0.35);
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      letter-spacing: 1.4px;
+      color: #ffd98a;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      font-size: 17px;
+      color: #f3d59a;
+      letter-spacing: 0.8px;
+    }
+
+    .arabic-title {
+      margin-top: 8px;
+      font-size: 20px;
+      color: #f9e7bd;
+      direction: rtl;
+    }
+
+    form {
+      position: relative;
+      z-index: 1;
+      margin-top: 26px;
+    }
+
+    label {
+      display: block;
+      margin-top: 16px;
+      margin-bottom: 7px;
+      color: #ffe6ad;
+      font-weight: bold;
+      letter-spacing: 0.4px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid rgba(218, 165, 32, 0.45);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.07);
+      color: #fff6df;
+      font-size: 15px;
+      outline: none;
+      font-family: Arial, sans-serif;
+      transition: 0.25s;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(255, 230, 173, 0.55);
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #ffd36b;
+      box-shadow: 0 0 0 3px rgba(255, 211, 107, 0.14);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .rating-title {
+      margin-top: 20px;
+      margin-bottom: 14px;
+      color: #ffe6ad;
+      font-weight: bold;
+      letter-spacing: 0.4px;
+    }
+
+    .rating-scale {
+      font-family: Arial, sans-serif;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(218, 165, 32, 0.36);
+      border-radius: 20px;
+      padding: 18px 16px 16px;
+    }
+
+    .faces {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      align-items: end;
+    }
+
+    .face-option {
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      transition: 0.25s;
+      opacity: 0.85;
+    }
+
+    .face-option:hover {
+      transform: translateY(-4px);
+      opacity: 1;
+    }
+
+    .face-option.selected {
+      transform: translateY(-7px) scale(1.05);
+      opacity: 1;
+    }
+
+    .face-circle {
+      width: 62px;
+      height: 62px;
+      margin: 0 auto 7px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 33px;
+      border: 3px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      transition: 0.25s;
+    }
+
+    .face-option.selected .face-circle {
+      border-color: #fff4cf;
+      box-shadow: 0 0 18px rgba(255, 218, 125, 0.55);
+    }
+
+    .face-red {
+      background: #ef1f25;
+    }
+
+    .face-orange {
+      background: #ef8d16;
+    }
+
+    .face-yellow {
+      background: #ffc21d;
+    }
+
+    .face-lime {
+      background: #bed63b;
+    }
+
+    .face-green {
+      background: #75b843;
+    }
+
+    .face-label {
+      font-size: 11px;
+      font-weight: bold;
+      color: #ffe6ad;
+    }
+
+    .rating-bar-wrap {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #ffe6ad;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .rating-bar {
+      flex: 1;
+      height: 15px;
+      border-radius: 20px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .bar-red { background: #ef1f25; }
+    .bar-orange { background: #ef8d16; }
+    .bar-yellow { background: #ffc21d; }
+    .bar-lime { background: #bed63b; }
+    .bar-green { background: #75b843; }
+
+    button {
+      width: 100%;
+      margin-top: 24px;
+      padding: 20px;
+      border: none;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #b87820, #f5d27a, #b87820);
+      color: #111;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+      transition: 0.25s;
+      text-transform: uppercase;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 26px rgba(217, 164, 65, 0.28);
+    }
+
+    button:disabled {
+      background: #777;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .success,
+    .error {
+      display: none;
+      margin-top: 16px;
+      text-align: center;
+      font-weight: bold;
+      position: relative;
+      z-index: 1;
+      font-family: Arial, sans-serif;
+    }
+
+    .success {
+      color: #8ff0a4;
+    }
+
+    .error {
+      color: #ff9b9b;
+    }
+
+    .footer {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(218, 165, 32, 0.25);
+      text-align: center;
+      color: #ffd98a;
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      position: relative;
+      z-index: 1;
+      text-transform: uppercase;
+      font-family: Arial, sans-serif;
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding: 14px;
+      }
+
+      .container {
+        padding: 22px;
+        border-radius: 20px;
+      }
+
+      .logo {
+        width: 120px;
+        height: 120px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .faces {
+        gap: 5px;
+      }
+
+      .face-circle {
+        width: 48px;
+        height: 48px;
+        font-size: 25px;
+      }
+
+      .face-label {
+        font-size: 9px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="container">
+      <div class="arabic-pattern"></div>
+
+      <div class="header">
+        <img src="lebanan-chef-logo.jpeg" alt="Lebanan Chef Logo" class="logo" />
+        <h1>Lebanan Chef</h1>
+        <div class="subtitle">Customer Details</div>
+        <div class="arabic-title">تفاصيل العميل</div>
+      </div>
+
+      <form id="customerForm">
+        <label>Name</label>
+        <input type="text" id="name" placeholder="Enter customer name" required />
+
+        <label>Mobile Number</label>
+        <input type="tel" id="mobile" placeholder="Enter mobile number" required />
+
+        <label>Email</label>
+        <input type="email" id="email" placeholder="Enter email address" required />
+
+        <label>Address</label>
+        <textarea id="address" rows="3" placeholder="Enter customer address" required></textarea>
+
+        <div class="rating-title">How was your experience?</div>
+        <input type="hidden" id="rating" required />
+
+        <div class="rating-scale">
+          <div class="faces">
+            <div class="face-option" data-rating="Very Bad 😡">
+              <div class="face-circle face-red">😡</div>
+              <div class="face-label">Very Bad</div>
+            </div>
+
+            <div class="face-option" data-rating="Bad ☹️">
+              <div class="face-circle face-orange">☹️</div>
+              <div class="face-label">Bad</div>
+            </div>
+
+            <div class="face-option" data-rating="Average 😐">
+              <div class="face-circle face-yellow">😐</div>
+              <div class="face-label">Average</div>
+            </div>
+
+            <div class="face-option" data-rating="Good 🙂">
+              <div class="face-circle face-lime">🙂</div>
+              <div class="face-label">Good</div>
+            </div>
+
+            <div class="face-option" data-rating="Excellent 😀">
+              <div class="face-circle face-green">😀</div>
+              <div class="face-label">Excellent</div>
+            </div>
+          </div>
+
+          <div class="rating-bar-wrap">
+            <span>−</span>
+            <div class="rating-bar">
+              <div class="bar-red"></div>
+              <div class="bar-orange"></div>
+              <div class="bar-yellow"></div>
+              <div class="bar-lime"></div>
+              <div class="bar-green"></div>
+            </div>
+            <span>+</span>
+          </div>
+        </div>
+
+        <button type="submit" id="submitBtn">SUBMIT</button>
+      </form>
+
+      <p class="success" id="successMessage">Customer details saved successfully!</p>
+      <p class="error" id="errorMessage">Something went wrong. Please contact IT Department.</p>
+
+      <div class="footer">
+        Prepared by Lebanan Chef IT Department
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby-j6xbDfdOMntd5zV6RHnDrgkNM63ZmbGi1ERq7JpUdr2ChxKdRpF8PeO6S9cWsIHB5w/exec";
+
+    const form = document.getElementById("customerForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const successMessage = document.getElementById("successMessage");
+    const errorMessage = document.getElementById("errorMessage");
+    const ratingInput = document.getElementById("rating");
+    const faceOptions = document.querySelectorAll(".face-option");
+
+    faceOptions.forEach(option => {
+      option.addEventListener("click", function() {
+        faceOptions.forEach(item => item.classList.remove("selected"));
+        this.classList.add("selected");
+        ratingInput.value = this.dataset.rating;
+      });
+    });
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      successMessage.style.display = "none";
+      errorMessage.style.display = "none";
+
+      if (!ratingInput.value) {
+        errorMessage.textContent = "Please select a rating.";
+        errorMessage.style.display = "block";
+        return;
+      }
+
+      if (GOOGLE_SCRIPT_URL === "PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE") {
+        errorMessage.textContent = "Google Sheet connection is not ready. Please contact IT Department.";
+        errorMessage.style.display = "block";
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Saving...";
+
+      const customer = {
+        name: document.getElementById("name").value.trim(),
+        mobile: document.getElementById("mobile").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        address: document.getElementById("address").value.trim(),
+        rating: ratingInput.value
+      };
+
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(customer)
+      })
+      .then(() => {
+        form.reset();
+        ratingInput.value = "";
+        faceOptions.forEach(item => item.classList.remove("selected"));
+        successMessage.style.display = "block";
+      })
+      .catch(() => {
+        errorMessage.textContent = "Something went wrong. Please contact IT Department.";
+        errorMessage.style.display = "block";
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "SUBMIT";
+      });
+    });
+  </script>
+</body>
+</html>
