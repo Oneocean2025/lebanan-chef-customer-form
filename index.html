@@ -205,25 +205,11 @@
       box-shadow: 0 0 18px rgba(255, 218, 125, 0.55);
     }
 
-    .face-red {
-      background: #ef1f25;
-    }
-
-    .face-orange {
-      background: #ef8d16;
-    }
-
-    .face-yellow {
-      background: #ffc21d;
-    }
-
-    .face-lime {
-      background: #bed63b;
-    }
-
-    .face-green {
-      background: #75b843;
-    }
+    .face-red { background: #ef1f25; }
+    .face-orange { background: #ef8d16; }
+    .face-yellow { background: #ffc21d; }
+    .face-lime { background: #bed63b; }
+    .face-green { background: #75b843; }
 
     .face-label {
       font-size: 8.5px;
@@ -484,7 +470,7 @@
   </div>
 
   <script>
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbybWuS_vo2M_AnhzlbN4DPDfL_-NseOIsGNzL2nWz1peLrPGidcXR_fWPs8-RLmAnMtYA/exec";
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxMRsPsWVJI1UxrYXvONiNt8UiHaGdsOUWhTCL8GuGLBxyByU2yo9_woe2OQMecCVCumg/exec";
 
     const form = document.getElementById("customerForm");
     const submitBtn = document.getElementById("submitBtn");
@@ -522,21 +508,17 @@
       submitBtn.disabled = true;
       submitBtn.textContent = "SAVING...";
 
-      const customer = {
-        name: document.getElementById("name").value.trim(),
-        mobile: document.getElementById("mobile").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        city: document.getElementById("city").value.trim(),
-        rating: ratingInput.value
-      };
+      const formData = new URLSearchParams();
+      formData.append("name", document.getElementById("name").value.trim());
+      formData.append("mobile", document.getElementById("mobile").value.trim());
+      formData.append("email", document.getElementById("email").value.trim());
+      formData.append("city", document.getElementById("city").value.trim());
+      formData.append("rating", ratingInput.value);
 
       fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(customer)
+        body: formData
       })
       .then(() => {
         form.reset();
