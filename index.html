@@ -15,26 +15,27 @@
       min-height: 100vh;
       font-family: Georgia, "Times New Roman", serif;
       background:
-        radial-gradient(circle at top, rgba(218, 165, 32, 0.18), transparent 35%),
+        radial-gradient(circle at top, rgba(218, 165, 32, 0.18), transparent 34%),
         linear-gradient(135deg, #020403, #071914 45%, #050505);
       color: #f8e8c0;
-      padding: 25px;
+      padding: 0;
     }
 
     .page {
-      min-height: calc(100vh - 50px);
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 14px;
     }
 
     .container {
       width: 100%;
-      max-width: 660px;
-      background: rgba(4, 20, 16, 0.92);
+      max-width: 620px;
+      background: rgba(4, 20, 16, 0.94);
       border: 1px solid rgba(218, 165, 32, 0.55);
-      border-radius: 26px;
-      padding: 28px;
+      border-radius: 24px;
+      padding: 18px;
       box-shadow:
         0 20px 60px rgba(0, 0, 0, 0.55),
         inset 0 0 30px rgba(218, 165, 32, 0.06);
@@ -45,24 +46,24 @@
     .container::before {
       content: "";
       position: absolute;
-      inset: 14px;
+      inset: 11px;
       border: 1px solid rgba(218, 165, 32, 0.22);
-      border-radius: 20px;
+      border-radius: 19px;
       pointer-events: none;
     }
 
     .arabic-pattern {
       position: absolute;
-      top: -90px;
-      right: -90px;
-      width: 230px;
-      height: 230px;
-      border: 2px solid rgba(218, 165, 32, 0.16);
+      top: -100px;
+      right: -100px;
+      width: 235px;
+      height: 235px;
+      border: 2px solid rgba(218, 165, 32, 0.14);
       border-radius: 50%;
       background:
         repeating-conic-gradient(
           from 0deg,
-          rgba(218, 165, 32, 0.11) 0deg 8deg,
+          rgba(218, 165, 32, 0.10) 0deg 8deg,
           transparent 8deg 16deg
         );
       opacity: 0.65;
@@ -75,33 +76,34 @@
     }
 
     .logo {
-      width: 150px;
-      height: 150px;
+      width: 112px;
+      height: 112px;
       object-fit: cover;
       border-radius: 50%;
       border: 3px solid #d9a441;
       box-shadow: 0 0 25px rgba(217, 164, 65, 0.35);
-      margin-bottom: 14px;
+      margin-bottom: 8px;
     }
 
     h1 {
       margin: 0;
-      font-size: 30px;
-      letter-spacing: 1.4px;
+      font-size: 25px;
+      letter-spacing: 1.2px;
       color: #ffd98a;
       text-transform: uppercase;
+      line-height: 1.1;
     }
 
     .subtitle {
-      margin-top: 8px;
-      font-size: 17px;
+      margin-top: 5px;
+      font-size: 14px;
       color: #f3d59a;
       letter-spacing: 0.8px;
     }
 
     .arabic-title {
-      margin-top: 8px;
-      font-size: 20px;
+      margin-top: 5px;
+      font-size: 17px;
       color: #f9e7bd;
       direction: rtl;
     }
@@ -109,63 +111,64 @@
     form {
       position: relative;
       z-index: 1;
-      margin-top: 26px;
+      margin-top: 12px;
     }
 
     label {
       display: block;
-      margin-top: 16px;
-      margin-bottom: 7px;
+      margin-top: 9px;
+      margin-bottom: 5px;
       color: #ffe6ad;
       font-weight: bold;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.3px;
+      font-size: 13px;
     }
 
-    input, textarea {
+    input {
       width: 100%;
-      padding: 13px 14px;
+      padding: 10px 12px;
       border: 1px solid rgba(218, 165, 32, 0.45);
-      border-radius: 14px;
+      border-radius: 13px;
       background: rgba(255, 255, 255, 0.07);
       color: #fff6df;
-      font-size: 15px;
+      font-size: 14px;
       outline: none;
       font-family: Arial, sans-serif;
       transition: 0.25s;
     }
 
-    input::placeholder,
-    textarea::placeholder {
+    input::placeholder {
       color: rgba(255, 230, 173, 0.55);
     }
 
-    input:focus,
-    textarea:focus {
+    input:focus {
       border-color: #ffd36b;
       box-shadow: 0 0 0 3px rgba(255, 211, 107, 0.14);
       background: rgba(255, 255, 255, 0.1);
     }
 
     .rating-title {
-      margin-top: 20px;
-      margin-bottom: 14px;
+      margin-top: 13px;
+      margin-bottom: 8px;
       color: #ffe6ad;
       font-weight: bold;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.3px;
+      text-align: center;
+      font-size: 14px;
     }
 
     .rating-scale {
       font-family: Arial, sans-serif;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(218, 165, 32, 0.36);
-      border-radius: 20px;
-      padding: 18px 16px 16px;
+      border-radius: 18px;
+      padding: 11px 10px 10px;
     }
 
     .faces {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 10px;
+      gap: 6px;
       align-items: end;
     }
 
@@ -177,25 +180,21 @@
       opacity: 0.85;
     }
 
-    .face-option:hover {
-      transform: translateY(-4px);
-      opacity: 1;
-    }
-
+    .face-option:hover,
     .face-option.selected {
-      transform: translateY(-7px) scale(1.05);
+      transform: translateY(-5px) scale(1.05);
       opacity: 1;
     }
 
     .face-circle {
-      width: 62px;
-      height: 62px;
-      margin: 0 auto 7px;
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 5px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 33px;
+      font-size: 35px;
       border: 3px solid rgba(255, 255, 255, 0.22);
       box-shadow: 0 8px 20px rgba(0,0,0,0.25);
       transition: 0.25s;
@@ -227,24 +226,25 @@
     }
 
     .face-label {
-      font-size: 11px;
+      font-size: 8.5px;
       font-weight: bold;
       color: #ffe6ad;
     }
 
     .rating-bar-wrap {
-      margin-top: 14px;
+      margin-top: 10px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
       color: #ffe6ad;
       font-size: 20px;
       font-weight: bold;
+      line-height: 1;
     }
 
     .rating-bar {
       flex: 1;
-      height: 15px;
+      height: 14px;
       border-radius: 20px;
       overflow: hidden;
       display: grid;
@@ -260,15 +260,15 @@
 
     button {
       width: 100%;
-      margin-top: 24px;
-      padding: 20px;
+      margin-top: 15px;
+      padding: 17px;
       border: none;
-      border-radius: 20px;
+      border-radius: 18px;
       background: linear-gradient(135deg, #b87820, #f5d27a, #b87820);
       color: #111;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 900;
-      letter-spacing: 0.8px;
+      letter-spacing: 1.5px;
       cursor: pointer;
       box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
       transition: 0.25s;
@@ -289,12 +289,13 @@
     .success,
     .error {
       display: none;
-      margin-top: 16px;
+      margin-top: 10px;
       text-align: center;
       font-weight: bold;
       position: relative;
       z-index: 1;
       font-family: Arial, sans-serif;
+      font-size: 13px;
     }
 
     .success {
@@ -306,57 +307,102 @@
     }
 
     .footer {
-      margin-top: 24px;
-      padding-top: 16px;
+      margin-top: 13px;
+      padding-top: 10px;
       border-top: 1px solid rgba(218, 165, 32, 0.25);
       text-align: center;
       color: #ffd98a;
-      font-size: 13px;
+      font-size: 11px;
       font-weight: bold;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       position: relative;
       z-index: 1;
       text-transform: uppercase;
       font-family: Arial, sans-serif;
     }
 
-    @media (max-width: 520px) {
-      body {
-        padding: 14px;
+    @media (max-height: 760px) {
+      .page {
+        align-items: flex-start;
       }
 
       .container {
-        padding: 22px;
+        padding: 14px;
+      }
+
+      .logo {
+        width: 92px;
+        height: 92px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      .arabic-title {
+        display: none;
+      }
+
+      .face-circle {
+        width: 56px;
+        height: 56px;
+        font-size: 31px;
+      }
+
+      button {
+        padding: 14px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .page {
+        padding: 10px;
+      }
+
+      .container {
+        padding: 14px;
         border-radius: 20px;
       }
 
       .logo {
-        width: 120px;
-        height: 120px;
+        width: 96px;
+        height: 96px;
       }
 
       h1 {
-        font-size: 24px;
+        font-size: 22px;
+      }
+
+      .subtitle {
+        font-size: 13px;
+      }
+
+      .arabic-title {
+        font-size: 15px;
+      }
+
+      input {
+        padding: 9px 11px;
       }
 
       .faces {
-        gap: 5px;
+        gap: 4px;
       }
 
       .face-circle {
-        width: 48px;
-        height: 48px;
-        font-size: 25px;
+        width: 52px;
+        height: 52px;
+        font-size: 29px;
       }
 
       .face-label {
-        font-size: 9px;
+        font-size: 7.5px;
       }
     }
   </style>
 </head>
 
-<body>
+<body data-brand="Lebanan Chef">
   <div class="page">
     <div class="container">
       <div class="arabic-pattern"></div>
@@ -378,8 +424,8 @@
         <label>Email</label>
         <input type="email" id="email" placeholder="Enter email address" required />
 
-        <label>Address</label>
-        <textarea id="address" rows="3" placeholder="Enter customer address" required></textarea>
+        <label>City</label>
+        <input type="text" id="city" placeholder="Enter city" required />
 
         <div class="rating-title">How was your experience?</div>
         <input type="hidden" id="rating" required />
@@ -474,13 +520,14 @@
       }
 
       submitBtn.disabled = true;
-      submitBtn.textContent = "Saving...";
+      submitBtn.textContent = "SAVING...";
 
       const customer = {
+        brand: document.body.dataset.brand,
         name: document.getElementById("name").value.trim(),
         mobile: document.getElementById("mobile").value.trim(),
         email: document.getElementById("email").value.trim(),
-        address: document.getElementById("address").value.trim(),
+        city: document.getElementById("city").value.trim(),
         rating: ratingInput.value
       };
 
